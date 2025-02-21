@@ -1,3 +1,4 @@
+$patch: replace
 apiVersion: kubevirt.io/v1
 kind: KubeVirt
 metadata:

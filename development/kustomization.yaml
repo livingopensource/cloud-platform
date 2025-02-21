@@ -10,3 +10,4 @@ patches:
   - path: delete-metallb-ns.yaml
   - path: delete-metallb-helmrepo.yaml
   - path: delete-metallb-hr.yaml
+  - path: kubevirt.yaml
