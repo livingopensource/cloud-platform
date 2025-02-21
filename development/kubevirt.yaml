@@ -1,5 +1,20 @@
----
-apiVersion: v1
-kind: Namespace
+apiVersion: kubevirt.io/v1
+kind: KubeVirt
 metadata:
-  name: kubevirt-labs
+  name: kubevirt
+  namespace: kubevirt
+spec:
+  configuration:
+    developerConfiguration:
+      featureGates:
+        - LiveMigration
+        - NetworkBindingPlugins
+    smbios:
+      sku: "SwiftCloud"
+      version: "v0.1.0"
+      manufacturer: "SwiftCloud Virtualization"
+      product: "labvm"
+      family: "losf"
+  workloadUpdateStrategy:
+    workloadUpdateMethods:
+    - LiveMigrate
