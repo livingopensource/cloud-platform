@@ -4,3 +4,6 @@ resources:
   - metallb.yaml
   - kamaji.yaml
   - cert-manager.yaml
+  - capi/00-namespace.yaml
+  - capi/helm-repo.yaml
+  - capi/helm-releases.yaml
