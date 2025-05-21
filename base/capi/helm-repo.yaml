@@ -1,0 +1,28 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: cluster-api
+  namespace: capi-operator-system
+spec:
+  interval: 1h
+  url: https://kubernetes-sigs.github.io/cluster-api/
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: cluster-api-bootstrap-kubeadm
+  namespace: capi-operator-system
+spec:
+  interval: 1h
+  url: https://kubernetes-sigs.github.io/cluster-api-bootstrap-provider-kubeadm
+---
+# Helm Repository for Cluster API Provider KubeVirt (CAPK)
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: cluster-api-provider-kubevirt
+  namespace: capi-operator-system
+spec:
+  interval: 1h
+  url: https://kubernetes-sigs.github.io/cluster-api-provider-kubevirt/

@@ -1,0 +1,33 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: cluster-api-provider-kubevirt
+  namespace: capi-operator-system
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: cluster-api-provider-kubevirt
+      version: "0.2.x" # Pin to a specific CAPK version. Check CAPK releases.
+      sourceRef:
+        kind: HelmRepository
+        name: cluster-api-provider-kubevirt
+        namespace: capi-operator-system
+      interval: 1m
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  dependsOn:
+    - name: cluster-api
+      namespace: capi-operator-system
+    - name: cluster-api-bootstrap-kubeadm
+      namespace: capi-operator-system
+    - name: kamaji # Depend on Kamaji instead of Kubeadm Control Plane
+      namespace: kamaji-system # Adjust namespace if Kamaji is in a different one
+  values:
+    storageClassName: "standard" # <--- IMPORTANT: Replace with your actual KubeVirt storage class
+    # serviceType: LoadBalancer # Uncomment if your management cluster supports LoadBalancer

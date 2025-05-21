@@ -1,0 +1,51 @@
+---
+# Helm Repository for Cluster API Control Plane Provider Kamaji (KCPK)
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: cluster-api-control-plane-provider-kamaji
+  namespace: capi-operator-system
+spec:
+  interval: 1h
+  url: https://clastix.github.io/cluster-api-control-plane-provider-kamaji/
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: cluster-api-control-plane-kamaji
+  namespace: capi-operator-system
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: cluster-api-control-plane-provider-kamaji
+      version: "0.12.x" # Pin to a specific KCPK version. Check KCPK releases.
+      sourceRef:
+        kind: HelmRepository
+        name: cluster-api-control-plane-provider-kamaji
+        namespace: capi-operator-system
+      interval: 1m
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  dependsOn:
+    - name: cluster-api
+      namespace: capi-operator-system
+    - name: kamaji # Ensure Kamaji core is ready
+      namespace: kamaji-system # Adjust namespace
+    # Ensure the default Kamaji Datastore is created
+    #- name: kamaji-etcd
+    #  namespace: kamaji-system # Adjust namespace
+  values:
+    # Reference the default Datastore created by kamaji-etcd chart
+    #defaultDatastoreName: default-datastore
+    # The namespace where Kamaji itself is running
+    kamajiNamespace: kamaji-system
+    # Configure resource limits for KCPK controller if needed
+    # resources:
+    #   limits:
+    #     cpu: 200m
+    #
