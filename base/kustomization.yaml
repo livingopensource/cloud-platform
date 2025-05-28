@@ -2,3 +2,8 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - metallb.yaml
+  - kamaji.yaml
+  - cert-manager.yaml
+  - capi/00-namespace.yaml
+  - capi/helm-repo.yaml
+  - capi/helm-releases.yaml

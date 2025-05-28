@@ -1,0 +1,52 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: cluster-api
+  namespace: capi-operator-system
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: cluster-api
+      version: "1.6.x" # Pin to a specific CAPI version
+      sourceRef:
+        kind: HelmRepository
+        name: cluster-api
+        namespace: capi-operator-system
+      interval: 1m
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  values:
+    enableServiceLinks: true
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: cluster-api-bootstrap-kubeadm
+  namespace: capi-operator-system
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: cluster-api-bootstrap-kubeadm
+      version: "1.6.x" # Pin to matching version
+      sourceRef:
+        kind: HelmRepository
+        name: cluster-api-bootstrap-kubeadm
+        namespace: capi-operator-system
+      interval: 1m
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  dependsOn:
+    - name: cluster-api
+      namespace: capi-operator-system
+
