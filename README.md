@@ -1,6 +1,6 @@
 # cloud-platform
 
-This is a GitOps approach to deploying the entire Living Open Source Lab Platform.
+This is a GitOps approach to deploying the entire Living Open Source cloud Platform.
 
 The motivation behind this deployment is to have an approach to deploy the entire Living Open Source Lab Platform with a single command. This setup heavily relies on using git as a single source of truth, while keeping track of changes and applying them in the cluster.
 
@@ -49,7 +49,7 @@ flux bootstrap github \
 
 ```bash
 flux bootstrap git \
-  --url=ssh://git@github.com/livingopensource/lab-platform.git \
+  --url=ssh://git@github.com/livingopensource/cloud-platform.git \
   --branch=main \
   --private-key-file=/path/to/your/private/key \
   --path=clusters/development
