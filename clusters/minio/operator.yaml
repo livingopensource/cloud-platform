@@ -11,7 +11,7 @@ metadata:
   namespace: minio-operator
 spec:
   interval: 1h
-  url: https://github.com/minio/operator?ref=v5.0.18
+  url: https://operator.min.io
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
