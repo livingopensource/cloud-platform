@@ -23,7 +23,7 @@ spec:
   chart:
     spec:
       chart: minio-operator
-      version: "5.x.x" # Pin to a specific major/minor version
+      #version: "5.x.x" # Pin to a specific major/minor version
       sourceRef:
         kind: HelmRepository
         name: minio-operator
